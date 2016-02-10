@@ -29,12 +29,14 @@ public class App extends android.app.Application{
 	
 	private static Context appContext = null;
 	
+	private static Container container = new Container();
+	
 
 	private static final Set<Configuration> configurations = new HashSet<Configuration>();
 	private static final Map<String, Object> appVars = new HashMap<String, Object>();
 	
 	private final ActivityLifecycleCallbacks lifeCycleCallbacks = new org.cleandroid.application.ActivityLifecycleCallbacks();
-
+    
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -48,6 +50,7 @@ public class App extends android.app.Application{
 		}
 		ConfigurationLoader.loadConfigurations(this.getApplicationContext());
 		registerActivityLifecycleCallbacks(lifeCycleCallbacks);
+		
 	
 	}
 
@@ -91,5 +94,8 @@ public class App extends android.app.Application{
 	}
 	
 	
+	public static Container getContainer(){
+		return container;
+	}
 
 }

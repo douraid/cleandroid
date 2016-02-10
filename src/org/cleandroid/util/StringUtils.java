@@ -50,12 +50,6 @@ public class StringUtils {
 		return str;
 	}
 	
-	public static String implode(String delimiter, String[] values){
-		String result = "";
-		for(String val:values){
-			result = result.concat(val).concat(delimiter);
-		}
-		return rtrim(result,delimiter);
-	}
+
 
 }

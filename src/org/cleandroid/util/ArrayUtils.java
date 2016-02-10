@@ -15,6 +15,14 @@ package org.cleandroid.util;
 
 public class ArrayUtils {
 	
+	
+	public static String implode(String delimiter, Object[] values){
+		String result = "";
+		for(Object val:values){
+			result = result.concat(String.valueOf(val)).concat(delimiter);
+		}
+		return StringUtils.rtrim(result,delimiter);
+	}
 
 
 }

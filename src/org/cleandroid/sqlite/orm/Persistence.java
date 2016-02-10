@@ -13,20 +13,18 @@
  */ 
 package org.cleandroid.sqlite.orm;
 
-import java.util.HashMap;
-import java.util.Map;
 
+import org.cleandroid.application.App;
 import org.cleandroid.sqlite.DataSource;
 
 public class Persistence {
 	
-	private static Map<String,EntityManager> entityManagers = new HashMap<String, EntityManager>();
 	
 	public static void registerEntityManager(DataSource dataSource){
-		entityManagers.put(dataSource.getName(), new EntityManager(dataSource));
+		App.getContainer().registerObject(dataSource.getName()+"_em", new EntityManager(dataSource));
 	}
 
 	public static EntityManager getEntityManager(String datasourceName){
-		return entityManagers.get(datasourceName);
+		return (EntityManager) App.getContainer().getObject(datasourceName+"_em");
 	}
 }

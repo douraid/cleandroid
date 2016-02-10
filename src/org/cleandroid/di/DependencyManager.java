@@ -22,6 +22,8 @@ import java.util.Map;
 import org.cleandroid.application.App;
 import org.cleandroid.form.FormModelHandler;
 import org.cleandroid.form.annotation.FormModel;
+import org.cleandroid.rest.RestClientHandler;
+import org.cleandroid.rest.annotation.RestClient;
 import org.cleandroid.service.ServiceHandler;
 import org.cleandroid.service.annotation.Service;
 import org.cleandroid.service.annotation.SystemService;
@@ -178,11 +180,17 @@ public class DependencyManager {
 		
 		else if(Inject.class.isInstance(annotation)){
 			if(varClass.isAnnotationPresent(FormModel.class)){
-				return FormModelHandler.handle(varClass,activity);
+				if(!App.getContainer().isRegistered(FormModel.class.getName()+"."+varClass.getName()))
+					App.getContainer().registerObject(FormModel.class.getName()+"."+varClass.getName(), FormModelHandler.handle(varClass,activity));
+				return App.getContainer().getObject(FormModel.class.getName()+"."+varClass.getName());
 			}
+			
 			else if(varClass.isAnnotationPresent(Service.class)){
 				return ServiceHandler.handle(varClass, activity);
 			}
+			
+			else if(varClass.isAnnotationPresent(RestClient.class))
+				return RestClientHandler.handle(varClass, activity);
 
 		}
 		

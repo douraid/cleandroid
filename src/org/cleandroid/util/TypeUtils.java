@@ -13,11 +13,15 @@
  */ 
 package org.cleandroid.util;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 public class TypeUtils {
 	
 	@SuppressWarnings({ "unchecked" })
-	public static <T> T getTypedValue(String value, Class<T> type){
+	public static <T> T getTypedValue(String value, Class<T> type,Object...extraArgs){
 		if(value!=null){
 		if (type.equals(int.class)
 				|| type.equals(Integer.class))
@@ -44,9 +48,23 @@ public class TypeUtils {
 			return (T) ((Byte)value.toString().getBytes()[0]);
 		else if (type.equals(byte[].class) || type.equals(Byte[].class))
 			return (T) value.toString().getBytes();
-		}
+		
 		else if(type.equals(boolean.class) || type.equals(Boolean.class))
 			return (T) ((Boolean) Boolean.parseBoolean(value));
+		else if(type.equals(Date.class)){
+			String dateFormat = "dd-MM-yyyy HH:mm:ss";
+			if(extraArgs.length>0)
+				dateFormat = (String) extraArgs[0];
+			try {
+				return (T) new SimpleDateFormat(dateFormat).parse(value);
+			} catch (ParseException e) {
+				throw new RuntimeException(e);
+			}
+			
+		}
+		
+		}
+
 		
 		return null;
 	}

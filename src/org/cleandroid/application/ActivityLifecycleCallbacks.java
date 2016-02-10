@@ -21,11 +21,9 @@ import org.cleandroid.lifecycle.OnActivitySaveInstanceStateHandler;
 import org.cleandroid.lifecycle.OnActivityStartedHandler;
 import org.cleandroid.lifecycle.OnActivityStoppedHandler;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 
-@SuppressLint("NewApi")
 public class ActivityLifecycleCallbacks implements App.ActivityLifecycleCallbacks{
 	
 	private Bundle savedInstanceState;

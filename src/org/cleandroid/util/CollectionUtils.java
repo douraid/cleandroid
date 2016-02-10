@@ -15,6 +15,7 @@ package org.cleandroid.util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 
@@ -27,6 +28,16 @@ public class CollectionUtils {
 		}
 		return Object.class;
 	}
+	
+	public static Class<?> getCollectionType(Method method){
+		if(method.getGenericReturnType() instanceof ParameterizedType){
+			ParameterizedType type = (ParameterizedType) method.getGenericReturnType();
+			return (Class<?>) type.getActualTypeArguments()[0];
+		}
+		return Object.class;
+	}
+	
+
 	
 	public static <T> T[] toTypedArray(Collection<?> collection, Class<T> type){
 		@SuppressWarnings("unchecked")

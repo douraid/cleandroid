@@ -13,13 +13,12 @@
  */ 
 package org.cleandroid.http;
 
-import org.apache.http.client.methods.HttpGet;
 
 
 public class GetRequest extends Request{
 	
 	public GetRequest(String url){
-		request = new HttpGet(url);
+		super(url,HttpMethod.GET);
 	}
 
 }

@@ -15,15 +15,13 @@ package org.cleandroid.http;
 
 public interface OnHttpResponseListener {
 	
-	void beforeRequest();
 	
-	void onSuccess(int statusCode, String responseData);
+	void onSuccess(int statusCode, HttpResponse response);
 	
-	void onFail(int statusCode, String message);
+	void onFail(int statusCode, String message, HttpResponse response);
 	
 	void onException(String message, Throwable exception);
 	
-	void afterRequest();
 	
 
 }

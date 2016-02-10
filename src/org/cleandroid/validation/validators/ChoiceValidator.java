@@ -16,7 +16,7 @@ package org.cleandroid.validation.validators;
 import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
-import org.cleandroid.util.StringUtils;
+import org.cleandroid.util.ArrayUtils;
 import org.cleandroid.validation.CleandroidValidator;
 import org.cleandroid.validation.annotation.Choice;
 
@@ -33,7 +33,7 @@ public class ChoiceValidator implements CleandroidValidator{
 
 	@Override
 	public String getErrorMessage() {
-		return constraint.message().replace("{choices}", StringUtils.implode(", ", constraint.choices()));
+		return constraint.message().replace("{choices}", ArrayUtils.implode(", ", constraint.choices()));
 	}
 
 }

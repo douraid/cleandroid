@@ -92,8 +92,13 @@ public class ORMUtils {
 	      Enumeration<String> entries = dex.entries();
 	      while (entries.hasMoreElements()) {
 	          String entry = entries.nextElement();
-	          
-    		  Class<?> entryClass = classLoader.loadClass(entry);
+	          Class<?> entryClass = null;
+	          try{
+	        	 entryClass = classLoader.loadClass(entry);
+	          }
+	          catch(IncompatibleClassChangeError e){
+	        	  continue;
+	          }
 
     		  for(String packageName:packages){
     			  if(entryClass.getPackage().getName().equals(packageName.trim()) && entryClass.isAnnotationPresent(Entity.class))

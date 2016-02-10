@@ -14,21 +14,42 @@
 package org.cleandroid.http;
 
 
-import org.apache.http.client.methods.HttpPost;
-
+import java.io.File;
+import java.io.InputStream;
 
 public class PostRequest extends Request{
 	
 	
 	public PostRequest(String url){
-		request = new HttpPost(url);
+		super(url,HttpMethod.POST);
 	}
 	
-	public Request addParameter(String name, String value){
+	public PostRequest addParameter(String name, String value){
 		parameters.put(name, value);
 		return this;
 	}
 	
+	
+	public PostRequest addFile(String name, File file){
+		files.put(name,file);
+		return this;
+	}
+	
+	public PostRequest setRequestBody(String requestBody){
+		return (PostRequest) super.setRequestBody(requestBody);
+	}
+	
+	public PostRequest setRequestBody(File file, String contentType){
+		return (PostRequest) super.setRequestBody(file);
+	}
+	
+	public PostRequest setRequestBody(InputStream inputStream, long length){
+		return (PostRequest) super.setRequestBody(inputStream);
+	}
+	
+	public PostRequest setRequestBody(byte[] bytes){
+		return (PostRequest) super.setRequestBody(bytes);
+	}
 	
 
 

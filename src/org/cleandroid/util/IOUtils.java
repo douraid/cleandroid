@@ -14,9 +14,13 @@
 package org.cleandroid.util;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+
+import android.util.Log;
 
 public class IOUtils {
 	
@@ -28,6 +32,43 @@ public class IOUtils {
 		while((line=reader.readLine())!=null)
 			sb.append(line).append('\n');
 		return sb.toString();
+	}
+	
+	public static File readStreamAsFile(InputStream is){
+		File f = new File("downloadedFile");
+		FileOutputStream fos = null;
+		try{
+			fos = new FileOutputStream(f);
+			int read = 0;
+			byte[] bytes = new byte[1024];
+
+			while ((read = is.read(bytes)) != -1) {
+				fos.write(bytes, 0, read);
+			}
+
+		}
+		catch(Exception e){
+			throw new RuntimeException(e);
+		}
+		finally{
+			try{
+			if(is!=null)
+				is.close();
+			}
+			catch(Exception e){
+				Log.e("Cleandroid",e.getMessage());
+			}
+			try{
+				if(fos!=null)
+					fos.close();
+				}
+				catch(Exception e){
+					Log.e("Cleandroid",e.getMessage());
+				}
+			
+		}
+		return f;
+		
 	}
 
 }
