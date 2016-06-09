@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+
+ext {
+    bintrayRepo = 'maven'
+    bintrayName = 'cleandroid-core'
+
+    publishedGroupId = 'org.cleandroid'
+    libraryName = 'Cleandroid Framework'
+    artifact = 'cleandroid-core'
+
+    libraryDescription = 'Cleandroid framework version 1.0 beta. It makes android native development as sweet as candies!'
+
+    siteUrl = 'https://github.com/douraid/cleandroid'
+    gitUrl = 'https://github.com/douraid/cleandroid.git'
+
+    libraryVersion = '1.0-beta'
+
+    developerId = 'douraid'
+    developerName = 'Douraid Arfaoui'
+    developerEmail = 'douraid.arfaoui@gmail.com'
+
+    licenseName = 'The Apache Software License, Version 2.0'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["Apache-2.0"]
+}
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-annotations:23.+'
+    compile 'com.android.support:support-v4:23.+'
+}
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
